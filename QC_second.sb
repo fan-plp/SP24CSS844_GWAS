@@ -10,7 +10,7 @@
 
 ##### SLURM Administrative Settings #####
 
-#SBATCH --job-name QC_check_first			#Name the job for convenience 
+#SBATCH --job-name QC_check_second			#Name the job for convenience 
 #SBATCH --output=%x-%j.SLURMout			#Name the output file (JobName-JobNumber.SLURMout)
 #SBATCH --mail-type=ALL				#Tell SLURM to email you when job starts, stops, error
 #SBATCH --mail-user=fanqiuro@msu.edu 				#Provide SLURM your email address
