@@ -1,5 +1,5 @@
 #direct to working directory 
-cd /mnt/scratch/fanqiuro
+cd /mnt/scratch/fanqiuro/Potato_GWAS/
 
 #make lists of names for each reads from folder L001, L002 and L003
 ls  /mnt/research/css844_2024/22557Eva_N23190_L001/ > List01
