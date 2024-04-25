@@ -40,8 +40,8 @@ cd ..  #now the current location is in Potato_GWAS folder
 for x in 'cat listlane1'
 do 
     bowtie2 -p 8 -x /mnt/scratch/fanqiuro/Potato_GWAS/Ref_genome_Bowtie2/DM1-3 \
-    -1 $in_dir"x"_R1_trim_p.fastq.gz -2 $in_dir"x"_R2_trim_p.fastq.gz \ 
-    -S /mnt/scratch/fanqiuro/Potato_GWAS/Bowtiemapped/"x".sam
+    -1 $in_dir"$x"_R1_trim_p.fastq.gz -2 $in_dir"$x"_R2_trim_p.fastq.gz \ 
+    -S /mnt/scratch/fanqiuro/Potato_GWAS/Bowtiemapped/"$x".sam
 done
 
 #now we need to convert the sam file to bam and sorted bam
@@ -54,8 +54,8 @@ in_dir1 = "/mnt/scratch/fanqiuro/Potato_GWAS/Bowtiemapped/"
 #convert sam to bam and then sorted bam
 for x in 'cat listlane1'
 do 
-    samtools view -S -b $in_dir1"x".sam > $in_dir1"x".bam
-    samtools sort -o $in_dir1"x".sorted.bam $in_dir1"x".bam  
+    samtools view -S -b $in_dir1"$x".sam > $in_dir1"$x".bam
+    samtools sort -o $in_dir1"$x".sorted.bam $in_dir1"$x".bam  
 done
 
 
