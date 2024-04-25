@@ -27,6 +27,6 @@ sed 's$_R1_003.fastq.gz$$g;s$_R2_003.fastq.gz$$g' List03 > listlane3
 
 #option 2: use script "bwa.sb" for indexing reference genome and mapping reads
 
-#Step 5: use script "nQuire.sb" to sort ploidy level of each genome
+#Step 5: use script "nQuire.sb" to sort ploidy level of each genome and plot the distribution in histgram using R afterwards
 
-#Step 6: SNP calling based on ploidy level. I did not get to this step since the module ends before I finish the step 5.would love to contibue the study if possible in the future
+#Step 6: SNP calling based on ploidy level. I did not get to this step since the module ends before I finish the step 5. Would love to contibue the study if possible in the future
