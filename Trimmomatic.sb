@@ -1,0 +1,55 @@
+#!/bin/bash
+
+##### SLURM Resource Requests #####
+
+#SBATCH --time=6-23:10				#How long the job will run (days-hours:minutes)
+#SBATCH --nodes=1				#How many compute nodes the job needs
+#SBATCH --ntasks=1				#How many concurrent tasks the job needs 
+#SBATCH --cpus-per-task=8			#How many CPUs each task needs 
+#SBATCH --mem-per-cpu=20G			#How much memory each CPU needs
+
+##### SLURM Administrative Settings #####
+
+#SBATCH --job-name=Trimmo_CSS844			#Name the job for convenience 
+#SBATCH --mail-type=ALL				#Tell SLURM to email you when job starts, stops, error
+#SBATCH --mail-user=fanqiuro@msu.edu 				#Provide SLURM your email address
+
+
+##### bash  Commands to Run #####
+
+module load Conda/3
+
+conda activate
+
+#make a directory for trimmed sequences
+cd /mnt/scratch/fanqiuro/Potato_GWAS/
+mkdir trimmo_out
+cd trimmo_out
+
+#input sequence location
+in_dir="/mnt/research/css844_2024/22557Eva_N23190_L001/"
+
+for x in `cat listlane1`
+do
+	trimmomatic PE -threads 8 -phred33 $in_dir"$x"_R1_001.fastq.gz $in_dir"$x"_R2_001.fastq.gz \
+	"$x"_R1_trim_p.fastq.gz "$x"_R1_trim_up.fastq.gz "$x"_R2_trim_p.fastq.gz "$x"_R2_trim_up.fastq.gz \
+	SLIDINGWINDOW:4:20 MINLEN:50 ILLUMINACLIP:adapters.fa:2:30:10 
+done
+
+in_dir2="/mnt/research/css844_2024/22558Bue_N23190_L002/"
+for x in 'cat listlane2'
+do 
+	trimmomatic PE -threads 8 -phred33 $in_dir2"$x"_R1_001.fastq.gz $in_dir2"$x"_R2_001.fastq.gz \
+        "$x"_R1_trim_p.fastq.gz "$x"_R1_trim_up.fastq.gz "$x"_R2_trim_p.fastq.gz "$x"_R2_trim_up.fastq.gz \
+        SLIDINGWINDOW:4:20 MINLEN:50 ILLUMINACLIP:adapters.fa:2:30:10
+done
+
+for x in 'cat listlane3'
+do 
+        trimmomatic PE -threads 8 -phred33 $in_dir3"$x"_R1_001.fastq.gz $in_dir3"$x"_R2_001.fastq.gz \
+        "$x"_R1_trim_p.fastq.gz "$x"_R1_trim_up.fastq.gz "$x"_R2_trim_p.fastq.gz "$x"_R2_trim_up.fastq.gz \
+        SLIDINGWINDOW:4:20 MINLEN:50 ILLUMINACLIP:adapters.fa:2:30:10
+done
+
+
+conda deactivate
