@@ -15,18 +15,18 @@ sed 's$_R1_003.fastq.gz$$g;s$_R2_003.fastq.gz$$g' List03 > listlane3
 
 # we will be performing step by step SNP calling for these reads using the lists genreated above.
 
-#Step 1: use script "QC_first" for quality check
+#Step 1: use script "QC_first.sb" for quality check
 
-#Step 2: use script "Trimmomatic" for trimming the reads
+#Step 2: use script "Trimmomatic.sb" for trimming the reads
 
-#Step 3: use script "QC_second" for quality check after trimming
+#Step 3: use script "QC_second.sb" for quality check after trimming
 
 #Step 4: now we can use either bowtie2 or bwa for mapping the reads
 
-#option 1: use script "Bowtie2" for indexing reference genome and mapping reads
+#option 1: use script "Bowtie2.sb" for indexing reference genome and mapping reads
 
-#option 2: use script "bwa" for indexing reference genome and mapping reads
+#option 2: use script "bwa.sb" for indexing reference genome and mapping reads
 
-#Step 5: use script "nQuire" to sort ploidy level of each genome
+#Step 5: use script "nQuire.sb" to sort ploidy level of each genome
 
 #Step 6: SNP calling based on ploidy level. I did not get to this step since the module ends before I finish the step 5.would love to contibue the study if possible in the future
