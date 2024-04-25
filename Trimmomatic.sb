@@ -44,6 +44,7 @@ do
         SLIDINGWINDOW:4:20 MINLEN:50 ILLUMINACLIP:adapters.fa:2:30:10
 done
 
+in_dir3="/mnt/research/css844_2024/22558Bue_N23190_L003/"
 for x in 'cat listlane3'
 do 
         trimmomatic PE -threads 8 -phred33 $in_dir3"$x"_R1_001.fastq.gz $in_dir3"$x"_R2_001.fastq.gz \
