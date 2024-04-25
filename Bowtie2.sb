@@ -1,0 +1,69 @@
+#!/bin/bash
+
+##### SLURM Resource Requests #####
+
+#SBATCH --time=6-23:59				#How long the job will run (days-hours:minutes)
+#SBATCH --cpus-per-task=8			#How many CPUs each task needs 
+#SBATCH --mem-per-cpu=20G			#How much memory each CPU needs
+
+##### SLURM Administrative Settings #####
+
+#SBATCH --job-name bowtie2			#Name the job for convenience 
+#SBATCH --output=%x-%j.SLURMout			#Name the output file (JobName-JobNumber.SLURMout)
+#SBATCH --mail-type=ALL				#Tell SLURM to email you when job starts, stops, error
+#SBATCH --mail-user=fanqiuro@msu.edu 				#Provide SLURM your email address
+
+
+
+cd /mnt/scratch/fanqiuro/Potato_GWAS
+
+mkdir Ref_genome_Bowtie2  #create a folder for reference genome
+mkdir Bowtiemapped # create a folder for mapped genome
+
+in_dir = "/mnt/scratch/fanqiuro/Potato_GWAS/trimmo_out"
+
+
+#load packages
+module load GCC/11.3.0
+module load Bowtie2/2.4.5
+
+
+#index reference genome
+cd Ref_genome_Bowtie2
+cp /mnt/research/css844_2024/DM_1-3_516_R44_potato_genome_assembly.v6.1.fa .
+bowtie2-build DM_1-3_516_R44_potato_genome_assembly.v6.1.fa ./DM1-3
+# this step will run for a while and generate a series of file with a prefix of DM1-3
+
+#now we can start map the reads to reference and produce sam file, we will be using the list(listlane1,2 amd 3 again)
+cd ..  #now the current location is in Potato_GWAS folder
+
+for x in 'cat listlane1'
+do 
+    bowtie2 -p 8 -x /mnt/scratch/fanqiuro/Potato_GWAS/Ref_genome_Bowtie2/DM1-3 \
+    -1 $in_dir"x"_R1_trim_p.fastq.gz -2 $in_dir"x"_R2_trim_p.fastq.gz \ 
+    -S /mnt/scratch/fanqiuro/Potato_GWAS/Bowtiemapped/"x".sam
+done
+
+#now we need to convert the sam file to bam and sorted bam
+
+module purge 
+module load GCC/11.3.0
+module load SAMtools/1.16.1
+
+in_dir1 = "/mnt/scratch/fanqiuro/Potato_GWAS/Bowtiemapped/"
+#convert sam to bam and then sorted bam
+for x in 'cat listlane1'
+do 
+    samtools view -S -b $in_dir1"x".sam > $in_dir1"x".bam
+    samtools sort -o $in_dir1"x".sorted.bam $in_dir1"x".bam  
+done
+
+
+#repeat this process for listlane2 and 3
+
+# now we can use the bam file for SNP calling - but we need to find out the ploidy level for each genotype first
+
+
+
+
+
