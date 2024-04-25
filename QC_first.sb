@@ -27,17 +27,17 @@ cd /mnt/scratch/fanqiuro/Potato_GWAS/
 in_dir1="/mnt/research/css844_2024/22557Eva_N23190_L001/"
 for x in 'cat listlane1' 
 do 
-	fastqc $in_dir1"$x"_R1_L001.fastq.gz "$x"_R2_L001.fastq.gz 
+	fastqc $in_dir1"$x"_R1_L001.fastq.gz $in_dir1"$x"_R2_L001.fastq.gz 
 done
 
 in_dir2="/mnt/research/css844_2024/22558Bue_N23190_L002/"
 for x in 'cat listlane2'
 do 
-	fastqc $in_dir2"$x"_R1_L002.fastq.gz "$x"_R2_L002.fastq.gz
+	fastqc $in_dir2"$x"_R1_L002.fastq.gz $in_dir2"$x"_R2_L002.fastq.gz
 done
 
 in_dir3="/mnt/research/css844_2024/22558Bue_N23190_L003/"
 for x in 'cat listlane3'
 do 
-	fastqc $in_dir3"$x"_R1_L003.fastq.gz "$x"_R2_L003.fastq.gz
+	fastqc $in_dir3"$x"_R1_L003.fastq.gz $in_dir3"$x"_R2_L003.fastq.gz
 done
