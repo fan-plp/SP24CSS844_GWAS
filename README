@@ -1,0 +1,32 @@
+#direct to working directory 
+cd /mnt/scratch/fanqiuro
+
+#make lists of names for each reads from folder L001, L002 and L003
+ls  /mnt/research/css844_2024/22557Eva_N23190_L001/ > List01
+sed 's$_R1_001.fastq.gz$$g;s$_R2_001.fastq.gz$$g' List01 > listlane1
+
+#repeat for L002 and L003
+ls  ls /mnt/research/css844_2024/22558Bue_N23190_L002/ > List02
+sed 's$_R1_002.fastq.gz$$g;s$_R2_002.fastq.gz$$g' List02 > listlane2
+
+ls /mnt/research/css844_2024/22558Bue_N23190_L003/ > List03
+sed 's$_R1_003.fastq.gz$$g;s$_R2_003.fastq.gz$$g' List03 > listlane3
+# now we have three text file named of listlane1, listlane2 and listlane3
+
+# we will be performing step by step SNP calling for these reads using the lists genreated above.
+
+#Step 1: use script "QC_first" for quality check
+
+#Step 2: use script "Trimmomatic" for trimming the reads
+
+#Step 3: use script "QC_second" for quality check after trimming
+
+#Step 4: now we can use either bowtie2 or bwa for mapping the reads
+
+#option 1: use script "Bowtie2" for indexing reference genome and mapping reads
+
+#option 2: use script "bwa" for indexing reference genome and mapping reads
+
+#Step 5: use script "nQuire" to sort ploidy level of each genome
+
+#Step 6: SNP calling based on ploidy level. I did not get to this step since the module ends before I finish the step 5.would love to contibue the study if possible in the future
